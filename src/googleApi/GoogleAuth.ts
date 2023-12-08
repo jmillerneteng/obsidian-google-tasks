@@ -58,7 +58,7 @@ export async function LoginGoogle(plugin: GoogleTasks) {
 		const oAuth2Client = new OAuth2Client(
 			plugin.settings.googleClientId,
 			plugin.settings.googleClientSecret,
-			"http://127.0.0.1:42813/callback"
+			"http://127.0.0.1:42814/callback"
 		);
 		const authorizeUrl = oAuth2Client.generateAuthUrl({
 			scope: "https://www.googleapis.com/auth/tasks",
@@ -73,7 +73,7 @@ export async function LoginGoogle(plugin: GoogleTasks) {
 						// acquire the code from the querystring, and close the web server.
 						const qs = new url.URL(
 							req.url,
-							"http://localhost:42813"
+							"http://localhost:42814"
 						).searchParams;
 						const code = qs.get("code");
 						res.end(
@@ -94,7 +94,7 @@ export async function LoginGoogle(plugin: GoogleTasks) {
 					console.error("Error getting Tokens.");
 				}
 			})
-			.listen(42813, () => {
+			.listen(42814, () => {
 				// open the browser to the authorize url to start the workflow
 				open(authorizeUrl, { wait: false }).then((cp: any) =>
 					cp.unref()
